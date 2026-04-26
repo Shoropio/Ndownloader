@@ -21,7 +21,7 @@ QScrollBar:vertical {
 QScrollBar::handle:vertical {
     background: #2D333B;
     min-height: 20px;
-    border-radius: 3px;
+    border-radius: 0px;
 }
 QScrollBar::handle:vertical:hover {
     background: #3B82F6;
@@ -56,7 +56,7 @@ QTabBar::tab:hover:!selected {
 QLineEdit {
     background-color: #1A1D23;
     border: 1px solid #2D333B;
-    border-radius: 8px;
+    border-radius: 0px;
     padding: 8px 16px;
     color: #F8FAFC;
     selection-background-color: #3B82F6;
@@ -72,7 +72,7 @@ QLineEdit::placeholder {
 /* Buttons */
 QPushButton {
     border: none;
-    border-radius: 8px;
+    border-radius: 0px;
     padding: 10px 20px;
     font-weight: 600;
     background-color: #3B82F6;
@@ -90,12 +90,12 @@ QPushButton:disabled {
 }
 
 QPushButton#secondary {
-    background-color: #262A33;
-    border: 1px solid #2D333B;
-    color: #CBD5E1;
+    background-color: #2D333B;
+    border: 1px solid #3F444D;
+    color: #E2E8F0;
 }
 QPushButton#secondary:hover {
-    background-color: #2D333B;
+    background-color: #3F444D;
     border-color: #3B82F6;
     color: #F8FAFC;
 }
@@ -104,7 +104,7 @@ QPushButton#secondary:hover {
 QComboBox {
     background-color: #1A1D23;
     border: 1px solid #2D333B;
-    border-radius: 8px;
+    border-radius: 0px;
     padding: 6px 12px;
     color: #E2E8F0;
 }
@@ -131,12 +131,12 @@ QProgressBar {
     border: none;
     background-color: #0F1115;
     height: 4px;
-    border-radius: 2px;
+    border-radius: 0px;
     text-align: center;
 }
 QProgressBar::chunk {
     background-color: #3B82F6;
-    border-radius: 2px;
+    border-radius: 0px;
 }
 
 /* Labels */
@@ -164,13 +164,13 @@ QProgressBar::chunk {
 #InputCard {
     background-color: #1A1D23;
     border: 1px solid #262A33;
-    border-radius: 12px;
+    border-radius: 0px;
 }
 
 #DownloadItem {
     background-color: #1A1D23;
     border: 1px solid #262A33;
-    border-radius: 12px;
+    border-radius: 0px;
 }
 #DownloadItem:hover {
     border: 1px solid #3B82F6;
@@ -181,7 +181,7 @@ QProgressBar::chunk {
     background-color: #0A0C10;
     color: #94A3B8;
     border: 1px solid #1A1D23;
-    border-radius: 8px;
+    border-radius: 0px;
     font-family: 'JetBrains Mono', 'Consolas', 'Courier New', monospace;
     font-size: 12px;
     padding: 10px;
@@ -192,4 +192,5 @@ DARK_STYLE = COMMON_STYLE
 
 # Light Style (Minimalist adaptation)
 LIGHT_STYLE = COMMON_STYLE.replace("#0F1115", "#F8FAFC").replace("#1A1D23", "#FFFFFF").replace("#262A33", "#E2E8F0").replace("#2D333B", "#CBD5E1").replace("#E2E8F0", "#1E293B").replace("#F8FAFC", "#0F172A").replace("#94A3B8", "#64748B")
+
 

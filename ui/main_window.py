@@ -102,6 +102,12 @@ class MainWindow(QMainWindow):
         
         self.setWindowTitle("Ndownloader")
         self.setMinimumSize(950, 750)
+        
+        # Window Icon
+        logo_path = get_resource_path(os.path.join("assets", "logo.png"))
+        if os.path.exists(logo_path):
+            self.setWindowIcon(QIcon(logo_path))
+            
         self.apply_theme()
 
         self.downloads = {} # url -> widget
@@ -129,7 +135,7 @@ class MainWindow(QMainWindow):
         self.config["theme"] = self.theme
         save_config(self.config)
         self.apply_theme()
-        self.theme_btn.setText("☼" if self.theme == "dark" else "☾")
+        self.theme_btn.setText("LIGHT" if self.theme == "dark" else "DARK")
 
     def toggle_lang(self):
         self.lang = "en" if self.lang == "es" else "es"
@@ -183,14 +189,14 @@ class MainWindow(QMainWindow):
         top_layout.addStretch()
 
         # Action Buttons
-        self.lang_btn = QPushButton("EN" if self.lang == "es" else "ES")
+        self.lang_btn = QPushButton("ES" if self.lang == "en" else "EN")
         self.lang_btn.setObjectName("secondary")
-        self.lang_btn.setFixedSize(40, 32)
+        self.lang_btn.setFixedSize(50, 36)
         self.lang_btn.clicked.connect(self.toggle_lang)
         
-        self.theme_btn = QPushButton("☼" if self.theme == "dark" else "☾")
+        self.theme_btn = QPushButton("LIGHT" if self.theme == "dark" else "DARK")
         self.theme_btn.setObjectName("secondary")
-        self.theme_btn.setFixedSize(40, 32)
+        self.theme_btn.setFixedSize(60, 36)
         self.theme_btn.clicked.connect(self.toggle_theme)
 
         top_layout.addWidget(self.lang_btn)
@@ -210,15 +216,8 @@ class MainWindow(QMainWindow):
         card_layout.setContentsMargins(25, 25, 25, 25)
         card_layout.setSpacing(20)
 
-        # Shadow effect
-        from PyQt6.QtWidgets import QGraphicsDropShadowEffect
-        from PyQt6.QtGui import QColor
-        shadow = QGraphicsDropShadowEffect()
-        shadow.setBlurRadius(20)
-        shadow.setXOffset(0)
-        shadow.setYOffset(4)
-        shadow.setColor(QColor(0, 0, 0, 60))
-        input_card.setGraphicsEffect(shadow)
+        # No shadows per user request (strict minimalist)
+        # input_card.setGraphicsEffect(None)
 
         # URL Row
         url_hbox = QHBoxLayout()

@@ -33,21 +33,11 @@ class DownloadItem(QWidget):
         self.layout.setContentsMargins(16, 16, 16, 16)
         self.layout.setSpacing(20)
 
-        # Shadow Effect
-        from PyQt6.QtWidgets import QGraphicsDropShadowEffect
-        from PyQt6.QtGui import QColor
-        shadow = QGraphicsDropShadowEffect()
-        shadow.setBlurRadius(15)
-        shadow.setXOffset(0)
-        shadow.setYOffset(2)
-        shadow.setColor(QColor(0, 0, 0, 40))
-        self.setGraphicsEffect(shadow)
-
         # Thumbnail
         self.thumb_label = QLabel()
         self.thumb_label.setFixedSize(140, 80)
         self.thumb_label.setObjectName("Thumbnail")
-        self.thumb_label.setStyleSheet("background-color: #0A0C10; border-radius: 8px;")
+        self.thumb_label.setStyleSheet("background-color: #0A0C10; border-radius: 0px;")
         self.thumb_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.layout.addWidget(self.thumb_label)
 
