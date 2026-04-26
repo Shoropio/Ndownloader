@@ -19,7 +19,7 @@ TRANSLATIONS = {
     "es": {
         "title": "Ndownloader",
         "url_placeholder": "Pega un enlace de YouTube, Twitter, m3u8...",
-        "add_queue": "Añadir descarga",
+        "add_queue": "A\u00f1adir descarga",
         "paste_clip": "Pegar desde portapapeles",
         "save_to": "Carpeta:",
         "browse": "Buscar",
@@ -29,9 +29,9 @@ TRANSLATIONS = {
         "tab_completed": "Completadas",
         "tab_errors": "Errores",
         "tab_logs": "Registro",
-        "logs_placeholder": "Los registros aparecerán aquí...",
-        "fetching": "Obteniendo información...",
-        "copyright": "© 2026 Shoropio Corporation. Todos los derechos reservados.",
+        "logs_placeholder": "Los registros aparecer\u00e1n aqu\u00ed...",
+        "fetching": "Obteniendo informaci\u00f3n...",
+        "copyright": "\u00a9 2026 Shoropio Corporation. Todos los derechos reservados.",
         "best": "Mejor",
         "video": "Video (MP4)",
         "audio": "Audio (MP3)"
@@ -51,7 +51,7 @@ TRANSLATIONS = {
         "tab_logs": "Logs",
         "logs_placeholder": "Logs will appear here...",
         "fetching": "Fetching info...",
-        "copyright": "© 2026 Shoropio Corporation. All rights reserved.",
+        "copyright": "\u00a9 2026 Shoropio Corporation. All rights reserved.",
         "best": "Best",
         "video": "Video (MP4)",
         "audio": "Audio (MP3)"
@@ -153,7 +153,21 @@ class MainWindow(QMainWindow):
         self.format_label.setText(self.t("format"))
         self.quality_label.setText(self.t("quality"))
         self.copyright_label.setText(self.t("copyright"))
+        self.log_panel.setPlaceholderText(self.t("logs_placeholder"))
         self.lang_btn.setText("ESP" if self.lang == "es" else "ENG")
+
+        format_index = self.format_combo.currentIndex()
+        quality_index = self.quality_combo.currentIndex()
+        self.format_combo.blockSignals(True)
+        self.quality_combo.blockSignals(True)
+        self.format_combo.clear()
+        self.format_combo.addItems([self.t("video"), self.t("audio")])
+        self.format_combo.setCurrentIndex(max(0, format_index))
+        self.quality_combo.clear()
+        self.quality_combo.addItems([self.t("best"), "1080p", "720p", "480p"])
+        self.quality_combo.setCurrentIndex(max(0, quality_index))
+        self.format_combo.blockSignals(False)
+        self.quality_combo.blockSignals(False)
         
         # Tabs
         self.tabs.setTabText(0, self.t("tab_queue"))

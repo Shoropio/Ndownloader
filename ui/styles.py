@@ -1,7 +1,7 @@
 COMMON_STYLE = """
 /* Global Styles */
 QWidget {
-    font-family: 'Inter', 'Segoe UI', 'Roboto', sans-serif;
+    font-family: 'Segoe UI';
     font-size: 14px;
     color: #E2E8F0;
     outline: none;
@@ -36,6 +36,13 @@ QTabWidget::pane {
     background-color: transparent;
     border-radius: 0px;
     margin-top: -1px;
+}
+QScrollArea {
+    background-color: transparent;
+    border: none;
+}
+QScrollArea > QWidget > QWidget {
+    background-color: #0F1115;
 }
 QTabBar::tab {
     background: transparent;
@@ -148,6 +155,11 @@ QProgressBar::chunk {
     color: #F8FAFC;
     letter-spacing: 0.5px;
 }
+#ItemTitle {
+    font-size: 15px;
+    font-weight: 600;
+    color: #F8FAFC;
+}
 #SecondaryLabel {
     color: #94A3B8;
     font-size: 13px;
@@ -195,7 +207,7 @@ DARK_STYLE = COMMON_STYLE
 # Explicitly defined Light Style for better aesthetics
 LIGHT_STYLE = """
 QWidget {
-    font-family: 'Inter', 'Segoe UI', 'Roboto', sans-serif;
+    font-family: 'Segoe UI';
     font-size: 14px;
     color: #1E293B;
 }
@@ -212,15 +224,32 @@ QScrollBar::handle:vertical {
 }
 QTabWidget::pane {
     border: 1px solid #E2E8F0;
+    background-color: transparent;
     border-radius: 0px;
+    margin-top: -1px;
+}
+QScrollArea {
+    background-color: transparent;
+    border: none;
+}
+QScrollArea > QWidget > QWidget {
+    background-color: #F8FAFC;
 }
 QTabBar::tab {
+    background: transparent;
     color: #64748B;
     padding: 12px 24px;
+    font-weight: 500;
+    border-bottom: 2px solid transparent;
 }
 QTabBar::tab:selected {
     color: #3B82F6;
+    background-color: rgba(59, 130, 246, 0.06);
     border-bottom: 2px solid #3B82F6;
+}
+QTabBar::tab:hover:!selected {
+    color: #0F172A;
+    background-color: rgba(15, 23, 42, 0.04);
 }
 QLineEdit {
     background-color: #FFFFFF;
@@ -276,6 +305,11 @@ QProgressBar {
     border: 1px solid #E2E8F0;
     border-radius: 0px;
 }
+#ItemTitle {
+    font-size: 15px;
+    font-weight: 600;
+    color: #0F172A;
+}
 #LogPanel {
     background-color: #F8FAFC;
     color: #475569;
@@ -289,5 +323,3 @@ QProgressBar {
     color: #94A3B8;
 }
 """
-
-

@@ -55,8 +55,8 @@ class DownloadItem(QWidget):
         info_layout.setSpacing(4)
 
         self.title_label = QLabel(title)
-        self.title_label.setObjectName("TitleLabel")
-        self.title_label.setStyleSheet("font-size: 15px; font-weight: 600; color: #F8FAFC;")
+        self.title_label.setObjectName("ItemTitle")
+        self.title_label.setWordWrap(True)
         info_layout.addWidget(self.title_label)
 
         source_text = f"Source: {source_domain}" if source_domain else "Source: Unknown"
@@ -120,7 +120,7 @@ class DownloadItem(QWidget):
                 eta = data.get('_eta_str', 'N/A')
                 size = data.get('_total_bytes_str', data.get('_total_bytes_estimate_str', 'N/A'))
                 
-                self.stats_label.setText(f"{p_val}% downloaded • {speed} • {eta} remaining")
+                self.stats_label.setText(f"{p_val}% downloaded | {speed} | {eta} remaining")
             except:
                 pass
 
