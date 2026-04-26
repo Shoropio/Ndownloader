@@ -107,19 +107,19 @@ QComboBox {
     background-color: #1A1D23;
     border: 1px solid #2D333B;
     border-radius: 0px;
-    padding: 6px 12px;
+    padding: 6px 30px 6px 12px;
     color: #E2E8F0;
 }
 QComboBox::drop-down {
     border: none;
-    width: 20px;
+    width: 30px;
 }
 QComboBox::down-arrow {
     image: none;
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-top: 5px solid #94A3B8;
-    margin-right: 10px;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 4px solid #94A3B8;
+    margin-top: 2px;
 }
 QComboBox QAbstractItemView {
     background-color: #1A1D23;
@@ -202,6 +202,14 @@ QWidget {
 QMainWindow {
     background-color: #F8FAFC;
 }
+QScrollBar:vertical {
+    background: transparent;
+    width: 6px;
+}
+QScrollBar::handle:vertical {
+    background: #CBD5E1;
+    border-radius: 0px;
+}
 QTabWidget::pane {
     border: 1px solid #E2E8F0;
     border-radius: 0px;
@@ -237,6 +245,22 @@ QComboBox {
     background-color: #FFFFFF;
     border: 1px solid #CBD5E1;
     border-radius: 0px;
+    padding: 6px 30px 6px 12px;
+    color: #0F172A;
+}
+QComboBox::drop-down {
+    border: none;
+    width: 30px;
+}
+QComboBox::down-arrow {
+    image: none;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 4px solid #64748B;
+}
+QProgressBar {
+    background-color: #E2E8F0;
+    border-radius: 0px;
 }
 #TopBar {
     background-color: #FFFFFF;
@@ -253,8 +277,9 @@ QComboBox {
     border-radius: 0px;
 }
 #LogPanel {
-    background-color: #0F172A;
-    color: #CBD5E1;
+    background-color: #F8FAFC;
+    color: #475569;
+    border: 1px solid #E2E8F0;
     border-radius: 0px;
 }
 #SecondaryLabel {
