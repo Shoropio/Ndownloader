@@ -84,8 +84,8 @@ class DownloadItem(QWidget):
 
         self.cancel_btn = QPushButton("Cancel")
         self.cancel_btn.setObjectName("secondary")
+        self.cancel_btn.setProperty("class", "danger") # Use property for styling
         self.cancel_btn.setFixedSize(85, 32)
-        self.cancel_btn.setStyleSheet("color: #EF4444;")
         self.cancel_btn.clicked.connect(self.cancel_requested.emit)
 
         self.open_btn = QPushButton("Open")
@@ -124,17 +124,22 @@ class DownloadItem(QWidget):
             except:
                 pass
 
-    def set_status(self, status, color=None):
+    def set_status(self, status, status_type=None):
         self.stats_label.setText(status)
-        if color:
-            self.stats_label.setStyleSheet(f"color: {color}; font-size: 12px;")
+        if status_type:
+            self.stats_label.setProperty("status", status_type)
+            self.stats_label.style().unpolish(self.stats_label)
+            self.stats_label.style().polish(self.stats_label)
         
         if "Finished" in status or "Done" in status:
             self.pause_btn.hide()
             self.cancel_btn.hide()
             self.open_btn.show()
-            self.progress_bar.setStyleSheet("QProgressBar::chunk { background-color: #22C55E; }")
+            self.progress_bar.setProperty("status", "success")
         elif "Error" in status:
-            self.progress_bar.setStyleSheet("QProgressBar::chunk { background-color: #EF4444; }")
+            self.progress_bar.setProperty("status", "error")
         elif "Pause" in status:
-            self.progress_bar.setStyleSheet("QProgressBar::chunk { background-color: #FACC15; }")
+            self.progress_bar.setProperty("status", "warning")
+        
+        self.progress_bar.style().unpolish(self.progress_bar)
+        self.progress_bar.style().polish(self.progress_bar)

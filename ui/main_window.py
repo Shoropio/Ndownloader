@@ -444,7 +444,7 @@ class MainWindow(QMainWindow):
             item = self.downloads[url]
             if hasattr(item, 'worker'):
                 item.worker.downloader.stop()
-            item.set_status("Cancelled", color="#EF4444")
+            item.set_status("Cancelled", status_type="error")
 
     def open_folder(self, path):
         if os.path.exists(path):
@@ -453,7 +453,7 @@ class MainWindow(QMainWindow):
     def on_finished(self, url, title, filename):
         if url in self.downloads:
             item = self.downloads[url]
-            item.set_status("Finished!", color="#22C55E")
+            item.set_status("Finished!", status_type="success")
             item.progress_bar.setValue(100)
             
             # Move to completed tab
@@ -466,7 +466,7 @@ class MainWindow(QMainWindow):
     def on_error(self, url, error):
         if url in self.downloads:
             item = self.downloads[url]
-            item.set_status(f"Error", color="#EF4444")
+            item.set_status(f"Error", status_type="error")
             
             # Move to error tab
             self.queue_layout.removeWidget(item)

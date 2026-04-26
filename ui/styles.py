@@ -102,6 +102,10 @@ QPushButton#secondary {
     background-color: #2D333B;
     border: 1px solid #3F444D;
     color: #E2E8F0;
+    border-radius: 0px;
+}
+QPushButton#secondary[class="danger"] {
+    color: #EF4444;
 }
 QPushButton#secondary:hover {
     background-color: #3F444D;
@@ -147,6 +151,9 @@ QProgressBar::chunk {
     background-color: #3B82F6;
     border-radius: 0px;
 }
+QProgressBar[status="success"]::chunk { background-color: #22C55E; }
+QProgressBar[status="error"]::chunk { background-color: #EF4444; }
+QProgressBar[status="warning"]::chunk { background-color: #FACC15; }
 
 /* Labels */
 #TitleLabel {
@@ -163,7 +170,13 @@ QProgressBar::chunk {
 #SecondaryLabel {
     color: #94A3B8;
     font-size: 13px;
+    background: transparent;
+    border: none;
 }
+#SecondaryLabel[status="error"] { color: #EF4444; }
+#SecondaryLabel[status="success"] { color: #22C55E; }
+#SecondaryLabel[status="warning"] { color: #FACC15; }
+
 #Footer {
     font-size: 12px;
     color: #475569;
