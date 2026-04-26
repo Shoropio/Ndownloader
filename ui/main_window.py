@@ -153,7 +153,7 @@ class MainWindow(QMainWindow):
         self.format_label.setText(self.t("format"))
         self.quality_label.setText(self.t("quality"))
         self.copyright_label.setText(self.t("copyright"))
-        self.lang_btn.setText("EN" if self.lang == "es" else "ES")
+        self.lang_btn.setText("ESP" if self.lang == "es" else "ENG")
         
         # Tabs
         self.tabs.setTabText(0, self.t("tab_queue"))
@@ -189,14 +189,14 @@ class MainWindow(QMainWindow):
         top_layout.addStretch()
 
         # Action Buttons
-        self.lang_btn = QPushButton("ES" if self.lang == "en" else "EN")
+        self.lang_btn = QPushButton("ESP" if self.lang == "es" else "ENG")
         self.lang_btn.setObjectName("secondary")
-        self.lang_btn.setFixedSize(50, 36)
+        self.lang_btn.setFixedSize(80, 36)
         self.lang_btn.clicked.connect(self.toggle_lang)
         
         self.theme_btn = QPushButton("LIGHT" if self.theme == "dark" else "DARK")
         self.theme_btn.setObjectName("secondary")
-        self.theme_btn.setFixedSize(60, 36)
+        self.theme_btn.setFixedSize(100, 36)
         self.theme_btn.clicked.connect(self.toggle_theme)
 
         top_layout.addWidget(self.lang_btn)

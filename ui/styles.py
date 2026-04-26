@@ -32,8 +32,10 @@ QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
 
 /* Tabs - VS Code style */
 QTabWidget::pane {
-    border: none;
+    border: 1px solid #262A33;
     background-color: transparent;
+    border-radius: 0px;
+    margin-top: -1px;
 }
 QTabBar::tab {
     background: transparent;
@@ -190,7 +192,77 @@ QProgressBar::chunk {
 
 DARK_STYLE = COMMON_STYLE
 
-# Light Style (Minimalist adaptation)
-LIGHT_STYLE = COMMON_STYLE.replace("#0F1115", "#F8FAFC").replace("#1A1D23", "#FFFFFF").replace("#262A33", "#E2E8F0").replace("#2D333B", "#CBD5E1").replace("#E2E8F0", "#1E293B").replace("#F8FAFC", "#0F172A").replace("#94A3B8", "#64748B")
+# Explicitly defined Light Style for better aesthetics
+LIGHT_STYLE = """
+QWidget {
+    font-family: 'Inter', 'Segoe UI', 'Roboto', sans-serif;
+    font-size: 14px;
+    color: #1E293B;
+}
+QMainWindow {
+    background-color: #F8FAFC;
+}
+QTabWidget::pane {
+    border: 1px solid #E2E8F0;
+    border-radius: 0px;
+}
+QTabBar::tab {
+    color: #64748B;
+    padding: 12px 24px;
+}
+QTabBar::tab:selected {
+    color: #3B82F6;
+    border-bottom: 2px solid #3B82F6;
+}
+QLineEdit {
+    background-color: #FFFFFF;
+    border: 1px solid #CBD5E1;
+    border-radius: 0px;
+    color: #0F172A;
+}
+QPushButton {
+    background-color: #3B82F6;
+    color: #FFFFFF;
+    border-radius: 0px;
+}
+QPushButton#secondary {
+    background-color: #F1F5F9;
+    border: 1px solid #E2E8F0;
+    color: #1E293B;
+}
+QPushButton#secondary:hover {
+    background-color: #E2E8F0;
+}
+QComboBox {
+    background-color: #FFFFFF;
+    border: 1px solid #CBD5E1;
+    border-radius: 0px;
+}
+#TopBar {
+    background-color: #FFFFFF;
+    border-bottom: 1px solid #E2E8F0;
+}
+#InputCard {
+    background-color: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 0px;
+}
+#DownloadItem {
+    background-color: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 0px;
+}
+#LogPanel {
+    background-color: #0F172A;
+    color: #CBD5E1;
+    border-radius: 0px;
+}
+#SecondaryLabel {
+    color: #64748B;
+}
+#Footer {
+    color: #94A3B8;
+}
+"""
 
 
