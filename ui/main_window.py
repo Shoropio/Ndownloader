@@ -164,8 +164,8 @@ class MainWindow(QMainWindow):
 
         # 1. Top Bar
         top_bar = QWidget()
-        top_bar.setFixedHeight(60)
-        top_bar.setStyleSheet("background-color: #171A21; border-bottom: 1px solid #2B3240;")
+        top_bar.setObjectName("TopBar")
+        top_bar.setMinimumHeight(64)
         top_layout = QHBoxLayout(top_bar)
         top_layout.setContentsMargins(20, 0, 20, 0)
 
@@ -205,26 +205,36 @@ class MainWindow(QMainWindow):
 
         # Input Card
         input_card = QFrame()
-        input_card.setStyleSheet("background-color: #171A21; border-radius: 12px; border: 1px solid #2B3240;")
+        input_card.setObjectName("InputCard")
         card_layout = QVBoxLayout(input_card)
         card_layout.setContentsMargins(25, 25, 25, 25)
         card_layout.setSpacing(20)
+
+        # Shadow effect
+        from PyQt6.QtWidgets import QGraphicsDropShadowEffect
+        from PyQt6.QtGui import QColor
+        shadow = QGraphicsDropShadowEffect()
+        shadow.setBlurRadius(20)
+        shadow.setXOffset(0)
+        shadow.setYOffset(4)
+        shadow.setColor(QColor(0, 0, 0, 60))
+        input_card.setGraphicsEffect(shadow)
 
         # URL Row
         url_hbox = QHBoxLayout()
         url_hbox.setSpacing(12)
         self.url_input = QLineEdit()
         self.url_input.setPlaceholderText(self.t("url_placeholder"))
-        self.url_input.setFixedHeight(48)
+        self.url_input.setMinimumHeight(48)
         
         self.download_btn = QPushButton(self.t("add_queue"))
-        self.download_btn.setFixedHeight(48)
+        self.download_btn.setMinimumHeight(48)
         self.download_btn.setFixedWidth(160)
         self.download_btn.clicked.connect(self.add_download)
 
         self.paste_btn = QPushButton(self.t("paste_clip"))
         self.paste_btn.setObjectName("secondary")
-        self.paste_btn.setFixedHeight(48)
+        self.paste_btn.setMinimumHeight(48)
         self.paste_btn.clicked.connect(self.paste_from_clipboard)
 
         url_hbox.addWidget(self.url_input, 1)
@@ -241,10 +251,10 @@ class MainWindow(QMainWindow):
         self.path_label.setObjectName("SecondaryLabel")
         self.path_input = QLineEdit()
         self.path_input.setReadOnly(True)
-        self.path_input.setFixedHeight(36)
+        self.path_input.setMinimumHeight(40)
         self.path_btn = QPushButton(self.t("browse"))
         self.path_btn.setObjectName("secondary")
-        self.path_btn.setFixedSize(80, 36)
+        self.path_btn.setFixedSize(90, 40)
         self.path_btn.clicked.connect(self.browse_folder)
 
         options_hbox.addWidget(self.path_label)
@@ -255,7 +265,7 @@ class MainWindow(QMainWindow):
         self.format_label = QLabel(self.t("format"))
         self.format_label.setObjectName("SecondaryLabel")
         self.format_combo = QComboBox()
-        self.format_combo.setFixedSize(120, 36)
+        self.format_combo.setFixedSize(130, 40)
         self.format_combo.addItems([self.t("video"), self.t("audio")])
         options_hbox.addWidget(self.format_label)
         options_hbox.addWidget(self.format_combo)
@@ -264,7 +274,7 @@ class MainWindow(QMainWindow):
         self.quality_label = QLabel(self.t("quality"))
         self.quality_label.setObjectName("SecondaryLabel")
         self.quality_combo = QComboBox()
-        self.quality_combo.setFixedSize(100, 36)
+        self.quality_combo.setFixedSize(110, 40)
         self.quality_combo.addItems([self.t("best"), "1080p", "720p", "480p"])
         options_hbox.addWidget(self.quality_label)
         options_hbox.addWidget(self.quality_combo)

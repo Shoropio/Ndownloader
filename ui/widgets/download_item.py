@@ -30,13 +30,24 @@ class DownloadItem(QWidget):
         super().__init__(parent)
         self.setObjectName("DownloadItem")
         self.layout = QHBoxLayout(self)
-        self.layout.setContentsMargins(15, 15, 15, 15)
-        self.layout.setSpacing(15)
+        self.layout.setContentsMargins(16, 16, 16, 16)
+        self.layout.setSpacing(20)
+
+        # Shadow Effect
+        from PyQt6.QtWidgets import QGraphicsDropShadowEffect
+        from PyQt6.QtGui import QColor
+        shadow = QGraphicsDropShadowEffect()
+        shadow.setBlurRadius(15)
+        shadow.setXOffset(0)
+        shadow.setYOffset(2)
+        shadow.setColor(QColor(0, 0, 0, 40))
+        self.setGraphicsEffect(shadow)
 
         # Thumbnail
         self.thumb_label = QLabel()
-        self.thumb_label.setFixedSize(120, 68)
-        self.thumb_label.setStyleSheet("background-color: #0F1115; border-radius: 6px;")
+        self.thumb_label.setFixedSize(140, 80)
+        self.thumb_label.setObjectName("Thumbnail")
+        self.thumb_label.setStyleSheet("background-color: #0A0C10; border-radius: 8px;")
         self.thumb_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.layout.addWidget(self.thumb_label)
 
@@ -55,7 +66,7 @@ class DownloadItem(QWidget):
 
         self.title_label = QLabel(title)
         self.title_label.setObjectName("TitleLabel")
-        self.title_label.setStyleSheet("font-size: 14px; font-weight: 700;")
+        self.title_label.setStyleSheet("font-size: 15px; font-weight: 600; color: #F8FAFC;")
         info_layout.addWidget(self.title_label)
 
         source_text = f"Source: {source_domain}" if source_domain else "Source: Unknown"
@@ -78,20 +89,18 @@ class DownloadItem(QWidget):
         
         self.pause_btn = QPushButton("Pause")
         self.pause_btn.setObjectName("secondary")
-        self.pause_btn.setFixedSize(70, 28)
-        self.pause_btn.setStyleSheet("font-size: 11px;")
+        self.pause_btn.setFixedSize(85, 32)
         self.pause_btn.clicked.connect(self.pause_requested.emit)
 
         self.cancel_btn = QPushButton("Cancel")
         self.cancel_btn.setObjectName("secondary")
-        self.cancel_btn.setFixedSize(70, 28)
-        self.cancel_btn.setStyleSheet("font-size: 11px; color: #EF4444;")
+        self.cancel_btn.setFixedSize(85, 32)
+        self.cancel_btn.setStyleSheet("color: #EF4444;")
         self.cancel_btn.clicked.connect(self.cancel_requested.emit)
 
         self.open_btn = QPushButton("Open")
         self.open_btn.setObjectName("secondary")
-        self.open_btn.setFixedSize(70, 28)
-        self.open_btn.setStyleSheet("font-size: 11px;")
+        self.open_btn.setFixedSize(85, 32)
         self.open_btn.clicked.connect(self.open_requested.emit)
         self.open_btn.hide() # Hidden until finished
 
