@@ -37,7 +37,6 @@ class DownloadItem(QWidget):
         self.thumb_label = QLabel()
         self.thumb_label.setFixedSize(140, 80)
         self.thumb_label.setObjectName("Thumbnail")
-        self.thumb_label.setStyleSheet("background-color: #0A0C10; border-radius: 0px;")
         self.thumb_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.layout.addWidget(self.thumb_label)
 

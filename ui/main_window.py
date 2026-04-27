@@ -7,7 +7,8 @@ from PyQt6.QtWidgets import (QMainWindow, QWidget, QVBoxLayout, QHBoxLayout,
                              QFileDialog, QScrollArea, QFrame, QTextEdit, QApplication, 
                              QTabWidget, QSpacerItem, QSizePolicy)
 from PyQt6.QtCore import Qt, QTimer, QThread, pyqtSignal, QSize
-from PyQt6.QtGui import QClipboard, QIcon, QPixmap
+from PyQt6.QtGui import QClipboard, QIcon, QPixmap, QColor
+from PyQt6.QtWidgets import QGraphicsDropShadowEffect
 
 from engine.downloader import Downloader, DownloadSignals
 from ui.styles import DARK_STYLE, LIGHT_STYLE
@@ -108,10 +109,9 @@ class MainWindow(QMainWindow):
         if os.path.exists(logo_path):
             self.setWindowIcon(QIcon(logo_path))
             
-        self.apply_theme()
-
         self.downloads = {} # url -> widget
         self.init_ui()
+        self.apply_theme()
         
         self.path_input.setText(self.config["output_path"])
 
@@ -129,6 +129,18 @@ class MainWindow(QMainWindow):
             self.setStyleSheet(DARK_STYLE)
         else:
             self.setStyleSheet(LIGHT_STYLE)
+        self.apply_theme_effects()
+
+    def apply_theme_effects(self):
+        if not hasattr(self, "input_card"):
+            return
+
+        for widget in (self.input_card, self.log_panel):
+            shadow = QGraphicsDropShadowEffect(widget)
+            shadow.setBlurRadius(24 if self.theme == "light" else 16)
+            shadow.setOffset(0, 8 if self.theme == "light" else 4)
+            shadow.setColor(QColor(15, 23, 42, 28 if self.theme == "light" else 80))
+            widget.setGraphicsEffect(shadow)
 
     def toggle_theme(self):
         self.theme = "light" if self.theme == "dark" else "dark"
@@ -224,14 +236,11 @@ class MainWindow(QMainWindow):
         content_layout.setSpacing(25)
 
         # Input Card
-        input_card = QFrame()
-        input_card.setObjectName("InputCard")
-        card_layout = QVBoxLayout(input_card)
+        self.input_card = QFrame()
+        self.input_card.setObjectName("InputCard")
+        card_layout = QVBoxLayout(self.input_card)
         card_layout.setContentsMargins(25, 25, 25, 25)
         card_layout.setSpacing(20)
-
-        # No shadows per user request (strict minimalist)
-        # input_card.setGraphicsEffect(None)
 
         # URL Row
         url_hbox = QHBoxLayout()
@@ -261,7 +270,7 @@ class MainWindow(QMainWindow):
 
         # Save to
         self.path_label = QLabel(self.t("save_to"))
-        self.path_label.setObjectName("SecondaryLabel")
+        self.path_label.setObjectName("FieldLabel")
         self.path_input = QLineEdit()
         self.path_input.setReadOnly(True)
         self.path_input.setMinimumHeight(40)
@@ -276,7 +285,7 @@ class MainWindow(QMainWindow):
 
         # Format
         self.format_label = QLabel(self.t("format"))
-        self.format_label.setObjectName("SecondaryLabel")
+        self.format_label.setObjectName("FieldLabel")
         self.format_combo = QComboBox()
         self.format_combo.setFixedSize(130, 40)
         self.format_combo.addItems([self.t("video"), self.t("audio")])
@@ -285,7 +294,7 @@ class MainWindow(QMainWindow):
 
         # Quality
         self.quality_label = QLabel(self.t("quality"))
-        self.quality_label.setObjectName("SecondaryLabel")
+        self.quality_label.setObjectName("FieldLabel")
         self.quality_combo = QComboBox()
         self.quality_combo.setFixedSize(110, 40)
         self.quality_combo.addItems([self.t("best"), "1080p", "720p", "480p"])
@@ -293,7 +302,7 @@ class MainWindow(QMainWindow):
         options_hbox.addWidget(self.quality_combo)
 
         card_layout.addLayout(options_hbox)
-        content_layout.addWidget(input_card)
+        content_layout.addWidget(self.input_card)
 
         # 3. Tabs
         self.tabs = QTabWidget()
